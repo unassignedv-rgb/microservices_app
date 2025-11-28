@@ -1,15 +1,24 @@
-# Микросервис управления товарами
-
+import yaml  # Импортируем библиотеку для работы с YAML
 from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+# ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ
+def load_products():
+    """Читает данные из файла products.yaml"""
+    try:
+        with open('products.yaml', 'r', encoding='utf-8') as file:
+            data = yaml.safe_load(file)
+            # Возвращаем только список items из файла
+            return data.get('items', [])
+    except FileNotFoundError:
+        return []
+    except yaml.YAMLError as e:
+        print(f"Ошибка в синтаксисе YAML: {e}")
+        return []
+
 # Данные товаров (в реальном приложении это была бы база данных)
-products = [
-    {"id": 1, "name": "Product A", "price": 10.0},
-    {"id": 2, "name": "Product B", "price": 20.0},
-    {"id": 3, "name": "Product C", "price": 15.5},
-]
+products = load_products()
 
 @app.route('/products', methods=['GET'])
 def get_products():

@@ -1,0 +1,30 @@
+# Каталог товаров нашего магазина
+# Валюта магазина
+currency: "USD"
+
+# Список товаров (List of dictionaries)
+items:
+  - id: 1
+    name: "Smartphone X"
+    price: 699.99
+    category: "electronics"
+    in_stock: true
+    specs:
+      color: "black"
+      memory: "128GB"
+
+  - id: 2
+    name: "Laptop Pro"
+    price: 1299.50
+    category: "computers"
+    in_stock: true
+    specs:
+      color: "silver"
+      screen: "15-inch"
+
+  - id: 3
+    name: "Wireless Mouse"
+    price: 25.00
+    category: "accessories"
+    in_stock: false # Товара нет в наличии
+    specs: {}
