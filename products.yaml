@@ -6,7 +6,7 @@ currency: "USD"
 items:
   - id: 1
     name: "Smartphone X"
-  price: 699.99
+    price: 699.99
     category: "electronics"
     in_stock: true
     specs:
