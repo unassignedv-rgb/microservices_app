@@ -37,16 +37,16 @@ jobs:
           flake8 . --count --exit-zero --max-complexity=10 \
           --max-line-length=127 --statistics
 
-      # Шаг Д: Запускаем тесты
-      - name: Run Unit Tests
-        run: |
-          # Указываем python path, чтобы тесты видели папки сервисов
-          export PYTHONPATH=$PYTHONPATH:.
-          pytest
-
       - name: Lint YAML files
         # Мы используем готовый Action из магазина GitHub
         uses: ibiqlik/action-yamllint@v3
         with:
           # Указываем, какие файлы проверять (все .yml и .yaml)
           file_extensions: 'yml,yaml'
+
+      # Шаг Д: Запускаем тесты
+      - name: Run Unit Tests
+        run: |
+          # Указываем python path, чтобы тесты видели папки сервисов
+          export PYTHONPATH=$PYTHONPATH:.
+          pytest
