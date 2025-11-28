@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest # Арендуем виртуальную машину Linux
 
     steps:
-    # Шаг А: Скачиваем наш код из репозитория
+      # Шаг А: Скачиваем наш код из репозитория
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -34,7 +34,8 @@ jobs:
         run: |
           # Проверяем все папки, игнорируем ошибки длины строки (E501)
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+          flake8 . --count --exit-zero --max-complexity=10 \
+          --max-line-length=127 --statistics
 
       # Шаг Д: Запускаем тесты
       - name: Run Unit Tests
