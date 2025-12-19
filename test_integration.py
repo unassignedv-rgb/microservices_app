@@ -22,7 +22,7 @@ def clean_db():
     try:
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM Orders")
+        cursor.execute("DELETE FROM orders")
         conn.commit()
         conn.close()
     except Exception:
