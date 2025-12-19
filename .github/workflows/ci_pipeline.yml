@@ -14,7 +14,7 @@ on:
 jobs:
   # --- РАБОТА 1: ТЕСТИРОВАНИЕ (Как в прошлой работе) ---
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
