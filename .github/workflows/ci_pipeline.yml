@@ -63,7 +63,7 @@ jobs:
           DB_DATABASE: MicroshopOrders
           DB_USER: sa
           DB_PASSWORD: TestPass123!
-        run: pytest test_products.py, test_integration.py
+        run: pytest test_products.py test_integration.py
 
 
   # --- РАБОТА 2: СБОРКА И РЕЛИЗ (Новая часть) ---
