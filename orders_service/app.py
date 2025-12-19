@@ -32,7 +32,7 @@ db = SQLAlchemy(app)
 
 
 # --- МОДЕЛЬ (ОПИСАНИЕ ТАБЛИЦЫ В КОДЕ) ---
-class Order(db.Model):
+class orders(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -53,11 +53,11 @@ def get_orders():
       200:
         description: Список
     """
-    orders = Order.query.all()
+    order = orders.query.all()
     return jsonify([{
         "id": o.id, "product_id": o.product_id,
         "customer_id": o.customer_id, "quantity": o.quantity
-    } for o in orders])
+    } for o in order])
 
 
 @app.route('/orders', methods=['POST'])
@@ -79,7 +79,7 @@ def create_order():
         description: Created
     """
     data = request.json
-    new_order = Order(
+    new_order = orders(
         product_id=data['product_id'],
         customer_id=data['customer_id'],
         quantity=data['quantity']
