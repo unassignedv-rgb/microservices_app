@@ -39,11 +39,23 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - name: Wait & Init DB
+      - name: Wait for SQL Server
+        run: sleep 15
+
+      # Сначала создаем пустую базу (контейнер БД)
+      - name: Create Empty Database
         run: |
-          sleep 15
           /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P TestPass123! -Q "CREATE DATABASE MicroshopOrders"
-          /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -d MicroshopOrders -U sa -P TestPass123! -Q "CREATE TABLE Orders (id INT PRIMARY KEY IDENTITY(1,1), product_id INT, customer_id INT, quantity INT)"
+
+      # А ТЕПЕРЬ МАГИЯ: Накатываем структуру через Alembic!
+      # Робот сам создаст таблицы по вашим миграциям.
+      - name: Run Migrations
+        env:
+          DB_SERVER: 127.0.0.1
+          DB_DATABASE: MicroshopOrders
+          DB_USER: sa
+          DB_PASSWORD: TestPass123!
+        run: alembic upgrade head
 
       - name: Run Tests
         env:
@@ -52,6 +64,7 @@ jobs:
           DB_USER: sa
           DB_PASSWORD: TestPass123!
         run: pytest test_products.py
+
 
   # --- РАБОТА 2: СБОРКА И РЕЛИЗ (Новая часть) ---
   build-and-release:
