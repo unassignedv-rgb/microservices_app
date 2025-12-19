@@ -40,6 +40,7 @@ class Order(db.Model):
     customer_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     # Мы добавим новое поле позже, в миграции №2
+    status = db.Column(db.String(50), default="New")
 
 
 # --- РОУТЫ ---
